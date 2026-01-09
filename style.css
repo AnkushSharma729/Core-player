@@ -291,3 +291,129 @@ section {
   background: var(--pink);
   border-radius: 50%;
 }
+
+/* =========================
+   RESPONSIVE – MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  /* HIDE SIDEBAR */
+  .sidebar {
+    display: none;
+  }
+
+  /* CONTENT FULL WIDTH */
+  .content {
+    padding: 18px;
+  }
+
+  /* TOP BAR STACK */
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .topbar input {
+    width: 100%;
+  }
+
+  .topbar button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .song {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .song strong {
+    font-size: 13px;
+  }
+
+  .song small {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .album-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .album-card img {
+    max-height: 220px;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .player {
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  #progress {
+    width: 100%;
+  }
+
+  .player button {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* =========================
+   MOBILE APP HEADER
+========================= */
+
+.app-header {
+  display: none;
+  justify-content: center;   /* 👈 CENTER */
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--pink);
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+/* SHOW ONLY ON MOBILE */
+@media (max-width: 768px) {
+  .app-header {
+    display: flex;
+  }
+}
+.app-header {
+  display: none;
+  justify-content: center;   /* 👈 CENTER */
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--pink);
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+/* SHOW ONLY ON MOBILE */
+@media (max-width: 768px) {
+  .app-header {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  section h2 {
+    margin-top: 18px;
+  }
+}
