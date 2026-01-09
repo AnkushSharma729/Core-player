@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Core Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h1>🎧 Core Player</h1>
+    <nav>
+      <a class="active">Home</a>
+      <a>Trending</a>
+      <a>Albums</a>
+      <a>Library</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="content">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <input type="text" placeholder="Search music">
+      <button>Sign In</button>
+    </header>
+
+    <!-- TRENDING SONGS -->
+    <section>
+      <h2>🔥 Trending Songs</h2>
+
+      <div class="song" onclick="playSong('songs/song1.mp3','Night Drive')">
+        <span>▶</span>
+        <div>
+          <strong>Night Drive</strong>
+          <small>Core Artist</small>
+        </div>
+      </div>
+
+      <div class="song" onclick="playSong('songs/song2.mp3','Pink Skies')">
+        <span>▶</span>
+        <div>
+          <strong>Pink Skies</strong>
+          <small>Core Artist</small>
+        </div>
+      </div>
+
+      <div class="song" onclick="playSong('songs/song3.mp3','Midnight Flow')">
+        <span>▶</span>
+        <div>
+          <strong>Midnight Flow</strong>
+          <small>Core Artist</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALBUMS -->
+    <section class="albums">
+      <h2>💿 Popular Albums</h2>
+
+      <div class="album-grid">
+        <div class="album-card" onclick="playSong('night vibe.mp3','Night Drive')">
+          <img src="night vibes.jpg">
+          <p>Night Vibes</p>
+        </div>
+
+        <div class="album-card" onclick="playSong('pink Mood.mp3','Pink Skies')">
+          <img src="pinkmoodd.jpg">
+          <p>Pink Mood</p>
+        </div>
+
+        <div class="album-card" onclick="playSong('midnight.mp3','Midnight Flow')">
+          <img src="midnight.jpg">
+          <p>Midnight</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- PLAYER -->
+<div class="player">
+  <div class="track-info">
+    <span id="now">No song playing</span>
+    <div class="time">
+      <small id="current">0:00</small>
+      <small id="duration">0:00</small>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button onclick="togglePlay()">⏯</button>
+  </div>
+
+  <input type="range" id="progress" value="0" min="0" max="100">
+
+  <audio id="audio"></audio>
+</div>
+
+  <script>
+  const audio = document.getElementById("audio");
+  const now = document.getElementById("now");
+  const progress = document.getElementById("progress");
+  const currentTimeEl = document.getElementById("current");
+  const durationEl = document.getElementById("duration");
+
+  let isPlaying = false;
+
+  function playSong(src, name) {
+    audio.src = src;
+    audio.play();
+    now.innerText = name;
+    isPlaying = true;
+  }
+
+  function togglePlay() {
+    if (!audio.src) return;
+    isPlaying ? audio.pause() : audio.play();
+    isPlaying = !isPlaying;
+  }
+
+  // Update progress bar
+  audio.addEventListener("timeupdate", () => {
+    const current = audio.currentTime;
+    const duration = audio.duration;
+
+    if (!isNaN(duration)) {
+      progress.value = (current / duration) * 100;
+
+      currentTimeEl.innerText = formatTime(current);
+      durationEl.innerText = formatTime(duration);
+    }
+  });
+
+  // Seek music
+  progress.addEventListener("input", () => {
+    const seekTime = (progress.value / 100) * audio.duration;
+    audio.currentTime = seekTime;
+  });
+
+  function formatTime(time) {
+    const min = Math.floor(time / 60);
+    const sec = Math.floor(time % 60);
+    return `${min}:${sec < 10 ? "0" : ""}${sec}`;
+  }
+</script>
+
+</body>
+</html>
